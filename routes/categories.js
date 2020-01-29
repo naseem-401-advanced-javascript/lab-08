@@ -4,10 +4,10 @@ const category = require('../models/categories/categories-model.js')
 const router = express.Router();
 
 router.get('/categories', getCategories)
-router.get('/categories/:id',getCategoriesid)
+router.get('/categories/:id', getCategoriesById)
 router.post('/categories', createCategories)
-// router.update('/categories/:id',updateCategories)
-// router.delete('/categories/:id',deleteCategories)
+router.put('/categories/:id', updateCategories)
+router.delete('/categories/:id', deleteCategories)
 
 function getCategories(req, res, next) {
     category.get()
@@ -18,15 +18,35 @@ function getCategories(req, res, next) {
 }
 
 
-function getCategoriesid(req,res,next){
-    category.get(req)
+function getCategoriesById(req, res, next) {
+    category.get(req.params.id)
+    .then(data=>{
+        res.status(200).json(data);
+        // return the data from the database
+    })
+    .catch(next)
 }
 
 function createCategories(req, res, next) {
     category.create(req.body)
         .then(data => {
-            req.params= data._id
             res.status(201).json(data)
         })
+        .catch(next)
 }
+function updateCategories(req,res,next){
+    category.update(req.params.id,req.body)
+    .then(data=>{
+        res.status(200).json(data)
+    })
+    .catch(next)
+}
+ function deleteCategories(req, res,next){
+     category.delete(req.params.id)
+     .then(data=>{
+         res.status(200).json(data)
+     })
+     .catch(next)
+ }
+
 module.exports = router;

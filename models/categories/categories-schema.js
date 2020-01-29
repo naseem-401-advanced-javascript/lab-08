@@ -1,4 +1,5 @@
 'use strict';
+
 const mongoose = require('mongoose');
 
 /// the schema is similar to the table's columns in mySQL
