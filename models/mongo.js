@@ -13,7 +13,7 @@ class Model {
     }
     get (_id){
         let queryObject = _id ?{ _id}:{}
-        return this.schema.find(queryObject);
+        return this.schema.find(queryObject);// monogoos metheod return promis find ()
     }
     create (record){
         let newRecord = new this.schema(record);
