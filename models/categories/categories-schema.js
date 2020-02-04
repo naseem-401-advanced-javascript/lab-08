@@ -1,3 +1,7 @@
+/* eslint-disable comma-dangle */
+/* eslint-disable camelcase */
+/* eslint-disable indent */
+/* eslint-disable strict */
 'use strict';
 
 const mongoose = require('mongoose');
@@ -8,7 +12,7 @@ const categories = mongoose.Schema({
     name: { type: String, required: true },/// required true means u have to fill it befor send it  
     display_name: { type: String, required: true },
     descreption: { type: String, required: true }
-})
+});
 
 module.exports = mongoose.model('categories', categories);
 // we send mongoos model (categoris) which is mongos schema 

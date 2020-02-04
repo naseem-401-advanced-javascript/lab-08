@@ -1,9 +1,12 @@
+/* eslint-disable indent */
+/* eslint-disable camelcase */
+/* eslint-disable strict */
 'use strict';
-const products_schema = require('./products-schema.js')
-const Model =require('../mongo.js')
+const products_schema = require('./products-schema.js');
+const Model = require('../mongo.js');
  class Products extends Model{
      constructor(){
-         super(products_schema)
+         super(products_schema);
      }
  }
 

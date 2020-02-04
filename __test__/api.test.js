@@ -1,12 +1,15 @@
-'use strict'
+/* eslint-disable camelcase */
+/* eslint-disable indent */
+/* eslint-disable strict */
+'use strict';
 
-const { server } = require('../lib/server.js')
-const supergoose = require('@code-fellows/supergoose')
-const mockRequest = supergoose(server)
+const { server } = require('../lib/server.js');
+const supergoose = require('@code-fellows/supergoose');
+const mockRequest = supergoose(server);
 
 describe('Categoris API', () => {
     it('post a new category', () => {
-        let obj = { name: 'testCategory', display_name: 'cool-category', description: 'not for sale' };
+        let obj = { name: 'testCategory', display_name: 'foocategory', description: 'not for sale' };
         return mockRequest.post('/api/v1/categories')
             .send(obj)
             .then(data => {
@@ -21,13 +24,13 @@ describe('Categoris API', () => {
         return mockRequest
             .get('/api/v1/categories')
             .then(data => {
-                expect(data.status).toBe(200)
-                expect(typeof data.body).toMatch('object')
-            })
-    })
+                expect(data.status).toBe(200);
+                expect(typeof data.body).toMatch('object');
+            });
+    });
 
     it('get one category item', () => {
-        let obj = { name: 'one' };
+        let obj = { name: 'one' , display_name: 'foocategory', description: 'not for sale'};
         return mockRequest.post('/api/v1/categories')
             .send(obj)
             .then(data => {
@@ -35,19 +38,19 @@ describe('Categoris API', () => {
                     .then(data => {
                         let record = data.body[0];
                         Object.keys(obj).forEach(key => {
-                            expect(record[key]).toEqual(obj[key])
-                        })
-                    })
-            })
+                            expect(record[key]).toEqual(obj[key]);
+                        });
+                    });
+            });
     });
 
     it('update category', () => {
-        let obj = { name: 'rrrrr' };
+        let obj = { name: 'testCategory', display_name: 'foocategory', description: 'not for sale'  };
         return mockRequest.post('/api/v1/categories')
             .send(obj)
             .then(data => {
                 return mockRequest.put(`/api/v1/categories/${data.body._id}`)
-                    .send({ name: 'UPDATED' })
+                    .send({  name: 'testCategoryUpdate', display_name: 'foocategory', description: 'not for sale'})
                     .then(results => {
                         expect(results.status).toBe(200);
                         expect(results.body.name).toEqual('TEST IS UPDATED');
@@ -56,7 +59,7 @@ describe('Categoris API', () => {
     });
 
     it('delete one category', () => {
-        let obj = { name: 'ssss' };
+        let obj = {name: 'testCategory', display_name: 'foocategory', description: 'not for sale' };
         return mockRequest
             .post('/api/v1/categories')
             .send(obj)
@@ -72,7 +75,7 @@ describe('Categoris API', () => {
                             });
                     });
             });
-    })
+    });
 
 });
 
@@ -93,13 +96,13 @@ describe('Products API', () => {
         return mockRequest
             .get('/api/v1/products')
             .then(data => {
-                expect(data.status).toBe(200)
-                expect(typeof data.body).toMatch('object')
-            })
-    })
+                expect(data.status).toBe(200);
+                expect(typeof data.body).toMatch('object');
+            });
+    });
 
     it('get one product item', () => {
-        let obj = { name: 'one' };
+        let obj = {  name: 'testProduct',category:'foocategory', display_name: 'fooproduct', description: 'for sale' };
         return mockRequest.post('/api/v1/products')
             .send(obj)
             .then(data => {
@@ -107,19 +110,19 @@ describe('Products API', () => {
                     .then(data => {
                         let record = data.body[0];
                         Object.keys(obj).forEach(key => {
-                            expect(record[key]).toEqual(obj[key])
-                        })
-                    })
-            })
+                            expect(record[key]).toEqual(obj[key]);
+                        });
+                    });
+            });
     });
 
     it('update product', () => {
-        let obj = { name: 'rrrrr' };
+        let obj = {  name: 'testProduct',category:'foocategory', display_name: 'fooproduct', description: 'for sale' };
         return mockRequest.post('/api/v1/products')
             .send(obj)
             .then(data => {
                 return mockRequest.put(`/api/v1/products/${data.body._id}`)
-                    .send({ name: 'UPDATED' })
+                    .send({ name: 'testProductUpdated',category:'foocategory', display_name: 'fooproduct', description: 'foosale'  })
                     .then(results => {
                         expect(results.status).toBe(200);
                         expect(results.body.name).toEqual('TEST IS UPDATED');
@@ -128,7 +131,7 @@ describe('Products API', () => {
     });
 
     it('delete one product', () => {
-        let obj = { name: 'ssss' };
+        let obj = { name: 'testProduct',category:'foocategory', display_name: 'fooproduct', description: 'for sale'  };
         return mockRequest
             .post('/api/v1/products')
             .send(obj)
@@ -144,5 +147,5 @@ describe('Products API', () => {
                             });
                     });
             });
-    })
+    });
 });

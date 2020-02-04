@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable strict */
 'use strict';
 
 // we put here the 4 main CRUD oprations
@@ -7,24 +9,24 @@ class Model {
     constructor(schema) {
         this.schema = schema;
     }
-    jsonSchema(){
+    jsonSchema() {
         console.log(typeof this.schema.jsonSchema);
-        return typeof this.schema.jsonSchema === 'function'? this.schema.jsonSchema():{}
+        return typeof this.schema.jsonSchema === 'function' ? this.schema.jsonSchema() : {};
     }
-    get (_id){
-        let queryObject = _id ?{ _id}:{}
+    get(_id) {
+        let queryObject = _id ? { _id } : {};
         return this.schema.find(queryObject);// monogoos metheod return promis find ()
     }
-    create (record){
-        let newRecord = new this.schema(record);
+    create(record) {
+        let newRecord = new this.Schema(record);
         return newRecord.save();
     }
-    update(_id,record){
-        return this.schema.findByIdAndUpdate(_id,record,{new:true});
+    update(_id, record) {
+        return this.schema.findByIdAndUpdate(_id, record, { new: true });
     }
-    delete(_id){
+    delete(_id) {
         return this.schema.findByIdAndUpdate(_id);
     }
 }
 
-module.exports= Model
+module.exports = Model;
