@@ -30,6 +30,7 @@ function getCategoriesById(req, res, next) {
 }
 
 function createCategories(req, res, next) {
+    console.log('cate.js',req.body);
     category.create(req.body)
         .then(data => {
             res.status(201).json(data);

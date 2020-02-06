@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 /* eslint-disable indent */
 /* eslint-disable strict */
 'use strict';
@@ -18,14 +19,16 @@ class Model {
         return this.schema.find(queryObject);// monogoos metheod return promis find ()
     }
     create(record) {
-        let newRecord = new this.Schema(record);
+        console.log('mongo.js',record);
+        let newRecord = new this.schema(record);
+        console.log('mogo.js///',newRecord);
         return newRecord.save();
     }
     update(_id, record) {
         return this.schema.findByIdAndUpdate(_id, record, { new: true });
     }
     delete(_id) {
-        return this.schema.findByIdAndUpdate(_id);
+        return this.schema.findByIdAndDelete(_id);
     }
 }
 

@@ -2,7 +2,7 @@
 /* eslint-disable new-cap */
 'ues strict';
 const express = require('express');
-const product = require('../models/products/products-model');
+const product = require('../models/products/products-model.js');
 const router = express.Router();
 
 router.get('/products', getProducts);

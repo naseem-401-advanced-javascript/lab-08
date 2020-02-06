@@ -6,8 +6,9 @@ const Model = require('../mongo.js');
 
 class Categories extends Model{
     constructor(){
+        console.log('model.js',schema);
         super(schema);
-        // take the schema and send it to the model connect to mongo interface 
+        // take the schema and send it to the model connect to mongo interface
     }
 }
 module.exports = new Categories();
